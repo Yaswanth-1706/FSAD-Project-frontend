@@ -1,0 +1,104 @@
+.welcomePage {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 1.3rem;
+  background:
+    radial-gradient(circle at 12% 15%, rgba(251, 146, 60, 0.18), transparent 30%),
+    radial-gradient(circle at 88% 85%, rgba(16, 185, 129, 0.2), transparent 30%),
+    linear-gradient(125deg, #0b132b 0%, #1c2541 48%, #102a43 100%);
+}
+
+.heroCard {
+  width: min(100%, 860px);
+  border-radius: 24px;
+  padding: clamp(1.2rem, 3vw, 2rem);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.06));
+  box-shadow: 0 26px 58px rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(12px);
+  animation: fadeUp 0.5s ease-out;
+}
+
+.badge {
+  margin: 0;
+  color: #fbbf24;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+}
+
+.title {
+  margin: 0.6rem 0 0;
+  font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+  color: #f8fafc;
+  font-size: clamp(1.65rem, 4vw, 2.8rem);
+  line-height: 1.15;
+}
+
+.subtitle {
+  margin: 0.8rem 0 0;
+  color: rgba(241, 245, 249, 0.9);
+  font-size: clamp(0.95rem, 1.6vw, 1.08rem);
+  max-width: 62ch;
+}
+
+.roleRow {
+  margin-top: 1.5rem;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.85rem;
+}
+
+.roleBtn {
+  border: 0;
+  border-radius: 14px;
+  padding: 0.95rem 1rem;
+  font: inherit;
+  font-weight: 800;
+  letter-spacing: 0.01em;
+  cursor: pointer;
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.roleBtn:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.04);
+}
+
+.studentBtn {
+  background: linear-gradient(135deg, #f97316, #ea580c);
+  color: #fff7ed;
+}
+
+.adminBtn {
+  background: linear-gradient(135deg, #14b8a6, #0f766e);
+  color: #ecfeff;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 700px) {
+  .welcomePage {
+    padding: 0.75rem;
+  }
+
+  .heroCard {
+    border-radius: 18px;
+    padding: 1.1rem;
+  }
+
+  .roleRow {
+    grid-template-columns: 1fr;
+  }
+}

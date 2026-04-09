@@ -1,0 +1,146 @@
+.shell {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 16rem 1fr;
+  grid-template-rows: 4rem 1fr;
+  grid-template-areas:
+    "sidebar topbar"
+    "sidebar content";
+  background: radial-gradient(circle at top right, #f0f9ff 0%, #eef2ff 45%, #f8fafc 100%);
+}
+
+.topbar {
+  grid-area: topbar;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0 1.5rem;
+  border-bottom: 1px solid #dbeafe;
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(8px);
+}
+
+.topbar h1 {
+  margin: 0;
+  font-size: 1.05rem;
+  color: #0f172a;
+  flex: 1;
+}
+
+.userMeta {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #334155;
+  min-width: 0;
+}
+
+.roleBadge {
+  border-radius: 999px;
+  padding: 0.3rem 0.7rem;
+  background: #dbeafe;
+  color: #1d4ed8;
+  font-size: 0.76rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.userName {
+  font-size: 0.9rem;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.menuBtn {
+  display: none;
+  border: 0;
+  background: #1d4ed8;
+  color: #ffffff;
+  border-radius: 10px;
+  padding: 0.45rem 0.75rem;
+  font-weight: 600;
+}
+
+.logoutBtn {
+  border: 0;
+  background: #dc2626;
+  color: #ffffff;
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  font-size: 0.875rem;
+}
+
+.logoutBtn:hover {
+  background: #b91c1c;
+}
+
+.sidebar {
+  grid-area: sidebar;
+  border-right: 1px solid #dbeafe;
+  background: linear-gradient(180deg, #0f172a 0%, #1e3a8a 100%);
+  color: #e2e8f0;
+  padding: 1.25rem 1rem;
+}
+
+.brand {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.navItem {
+  display: block;
+  color: #cbd5e1;
+  text-decoration: none;
+  border-radius: 10px;
+  padding: 0.65rem 0.8rem;
+  margin: 0.25rem 0;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.navItem:hover {
+  background: rgba(255, 255, 255, 0.14);
+  transform: translateX(2px);
+}
+
+.active {
+  background: rgba(59, 130, 246, 0.33);
+  color: #eff6ff;
+}
+
+.content {
+  grid-area: content;
+  padding: 1.2rem;
+}
+
+@media (max-width: 920px) {
+  .shell {
+    grid-template-columns: 1fr;
+    grid-template-rows: 4rem auto 1fr;
+    grid-template-areas:
+      "topbar"
+      "sidebar"
+      "content";
+  }
+
+  .menuBtn {
+    display: inline-block;
+  }
+
+  .sidebar {
+    display: none;
+    border-right: 0;
+    border-bottom: 1px solid #1e3a8a;
+  }
+
+  .sidebarOpen {
+    display: block;
+  }
+}

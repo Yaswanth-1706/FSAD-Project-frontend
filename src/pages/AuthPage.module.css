@@ -1,0 +1,159 @@
+.authPage {
+  min-height: calc(100vh - 2.4rem);
+  display: grid;
+  place-items: center;
+  padding: 1.2rem;
+  background:
+    radial-gradient(circle at 15% 20%, rgba(251, 146, 60, 0.26), transparent 42%),
+    radial-gradient(circle at 85% 85%, rgba(20, 184, 166, 0.24), transparent 40%),
+    linear-gradient(145deg, #0f172a 0%, #1f2937 52%, #111827 100%);
+  border-radius: 20px;
+}
+
+.authCard {
+  width: min(100%, 500px);
+  border-radius: 24px;
+  padding: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.08));
+  box-shadow: 0 24px 50px rgba(0, 0, 0, 0.32);
+  backdrop-filter: blur(16px);
+  animation: riseIn 0.45s ease-out;
+}
+
+.authHeader {
+  margin-bottom: 1.1rem;
+  font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+}
+
+.eyebrow {
+  margin: 0;
+  color: #fbbf24;
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.title {
+  margin: 0.4rem 0 0;
+  color: #f8fafc;
+  font-size: clamp(1.45rem, 3vw, 2rem);
+  line-height: 1.15;
+}
+
+.subtitle {
+  margin: 0.45rem 0 0;
+  color: rgba(241, 245, 249, 0.86);
+  font-size: 0.92rem;
+}
+
+.tabRow {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.tabBtn {
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 999px;
+  background: rgba(148, 163, 184, 0.2);
+  color: #e2e8f0;
+  font-weight: 700;
+  padding: 0.58rem 0.8rem;
+  cursor: pointer;
+  transition: transform 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+}
+
+.tabBtn:hover {
+  transform: translateY(-1px);
+}
+
+.tabActive {
+  background: linear-gradient(135deg, #f97316, #ea580c);
+  border-color: transparent;
+  color: #fff7ed;
+}
+
+.authForm {
+  display: grid;
+  gap: 0.8rem;
+}
+
+.field {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.field label {
+  color: rgba(226, 232, 240, 0.94);
+  font-weight: 600;
+  font-size: 0.88rem;
+}
+
+.input {
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  border-radius: 12px;
+  background: rgba(15, 23, 42, 0.48);
+  color: #f8fafc;
+  padding: 0.62rem 0.72rem;
+  font: inherit;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.input::placeholder {
+  color: rgba(203, 213, 225, 0.75);
+}
+
+.input:focus {
+  border-color: #f97316;
+  box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.28);
+}
+
+.submitBtn {
+  margin-top: 0.3rem;
+  border: 0;
+  border-radius: 12px;
+  padding: 0.7rem 0.9rem;
+  font-weight: 800;
+  color: #fff7ed;
+  background: linear-gradient(120deg, #14b8a6 0%, #0d9488 48%, #0f766e 100%);
+  cursor: pointer;
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.submitBtn:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.05);
+}
+
+.submitBtn:disabled {
+  cursor: not-allowed;
+  opacity: 0.68;
+  transform: none;
+}
+
+@keyframes riseIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (max-width: 640px) {
+  .authPage {
+    padding: 0.65rem;
+    border-radius: 14px;
+  }
+
+  .authCard {
+    padding: 1.1rem;
+    border-radius: 18px;
+  }
+}
