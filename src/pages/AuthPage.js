@@ -1,9 +1,13 @@
 import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { fetchUsers, getApiErrorMessage, login, signup } from "../api/client";
+import { createUser, fetchUsers, getApiErrorMessage, login, signup } from "../api/client";
 import { useAuth } from "../context/AuthContext";
 import { useToast } from "../components/ToastProvider";
 import styles from "./AuthPage.module.css";
+
+function normalizeValue(value) {
+  return String(value || "").trim().toLowerCase();
+}
 
 function AuthPage() {
   const [tab, setTab] = useState("login");
@@ -54,19 +58,48 @@ function AuthPage() {
         message.includes("Failed to fetch");
 
       if (isAuthUnavailable) {
-        if (message.includes("Network Error") || message.includes("Failed to fetch")) {
-          try {
-            await fetchUsers();
-          } catch {
-            notifyInfo("Local session", "Backend is not reachable, so continuing without server auth.");
-          }
-        } else {
-          notifyInfo("Auth endpoint missing", "Proceeding with local session fallback.");
+        if (tab === "signup") {
+          await createUser({
+            name: form.name,
+            email: form.email,
+            password: form.password,
+            role: selectedRole.toUpperCase(),
+          });
+          notifyInfo("Auth endpoint missing", "Saving the account locally for future login.");
+          authLogin("local-session", { role: selectedRole, name: form.name, email: form.email });
+          navigate("/dashboard", { replace: true });
+          return;
         }
 
-        authLogin("local-session", { role: selectedRole, name: form.name, email: form.email });
-        navigate("/dashboard", { replace: true });
-        return;
+        try {
+          const localUsers = await fetchUsers();
+          const matchedUser = localUsers.find((user) => {
+            const userEmail = normalizeValue(user.email);
+            const userPassword = String(user.password || "");
+            const userRole = normalizeValue(user.role || "student");
+            return (
+              userEmail === normalizeValue(form.email) &&
+              userPassword === form.password &&
+              userRole === selectedRole
+            );
+          });
+
+          if (!matchedUser) {
+            notifyError("Authentication failed", "Invalid email or password.");
+            return;
+          }
+
+          authLogin("local-session", {
+            role: matchedUser.role || selectedRole,
+            name: matchedUser.name || form.name,
+            email: matchedUser.email || form.email,
+          });
+          navigate("/dashboard", { replace: true });
+          return;
+        } catch {
+          notifyError("Authentication failed", "Backend is not reachable and local login data is unavailable.");
+          return;
+        }
       }
 
       notifyError("Authentication failed", message);
