@@ -44,11 +44,11 @@ function AuthPage() {
         notifySuccess("Signup successful", "Account created.");
       }
 
-      // Store token if available in response
+
       const token = response?.token || response?.accessToken || "authenticated";
       authLogin(token, { role: selectedRole, name: form.name, email: form.email });
 
-      // Navigate to dashboard
+
       navigate("/dashboard", { replace: true });
     } catch (error) {
       const message = getApiErrorMessage(error, "Auth endpoint unavailable or request rejected");
